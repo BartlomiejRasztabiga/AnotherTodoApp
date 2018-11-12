@@ -1,7 +1,6 @@
 import React from "react";
 import thunk from "redux-thunk";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 
@@ -18,11 +17,7 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <Switch>
-        <Route component={App} />
-      </Switch>
-    </Router>
+    <App />
   </Provider>,
   document.getElementById("root")
 );

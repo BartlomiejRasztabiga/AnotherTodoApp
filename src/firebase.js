@@ -27,7 +27,10 @@ firebase.initializeApp(config);
 const settings = { timestampsInSnapshots: true };
 const firestore = firebase.firestore();
 firestore.settings(settings);
+
 const storage = firebase.storage();
+
 const auth = firebase.auth();
+auth.setPersistence(firebase.auth.Auth.Persistence.NONE); // do not remember password
 
 export { firestore, firebase, storage, auth, authUiConfig };

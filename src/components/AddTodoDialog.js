@@ -50,7 +50,7 @@ function AddTodoDialog(props) {
       todo.attachments = attachmentsURLs;
     }
 
-    addTodo(todo);
+    addTodo(todo, props.userUID);
     setDescription("");
     setAttachments([]);
 
@@ -105,7 +105,8 @@ AddTodoDialog.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    showAddTodoDialog: state.todosReducer.showAddTodoDialog
+    showAddTodoDialog: state.todosReducer.showAddTodoDialog,
+    userUID: state.todosReducer.userUID
   };
 };
 

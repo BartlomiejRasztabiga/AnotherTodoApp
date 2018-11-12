@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   isSignedIn: false,
-  user: null,
+  userUID: null,
   showAddTodoDialog: false
 };
 
@@ -27,13 +27,13 @@ const todosReducer = (state = initialState, action) => {
       return {
         ...state,
         isSignedIn: true,
-        user: action.payload
+        userUID: action.payload
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isSignedIn: false,
-        user: null
+        userUID: null
       };
     default:
       return state;

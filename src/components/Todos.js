@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { List, Paper } from "@material-ui/core";
 
 import Todo from "./Todo";
 import { subscribeOnTodos } from "../services/todosService";
 
-function Todos() {
+function Todos(props) {
   const [todos, setTodos] = useState([]);
+
   useEffect(() => {
-    subscribeOnTodos(todos => setTodos(todos));
+    subscribeOnTodos(props.userUID, todos => setTodos(todos));
   }, []);
 
   return (
@@ -21,4 +23,10 @@ function Todos() {
   );
 }
 
-export default Todos;
+const mapStateToProps = state => {
+  return {
+    userUID: state.todosReducer.userUID
+  };
+};
+
+export default connect(mapStateToProps)(Todos);

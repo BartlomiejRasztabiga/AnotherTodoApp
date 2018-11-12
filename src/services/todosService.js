@@ -2,18 +2,22 @@ import { firestore, storage } from "../firebase";
 
 const todosCollection = firestore.collection("todos");
 
-export function subscribeOnTodos(callback) {
-  todosCollection.orderBy("createdAt").onSnapshot(querySnapshot => {
-    callback(querySnapshot.docs);
-  });
+export function subscribeOnTodos(userUID, callback) {
+  todosCollection
+    .where("userUID", "==", userUID)
+    .orderBy("createdAt")
+    .onSnapshot(querySnapshot => {
+      callback(querySnapshot.docs);
+    });
 }
 
-export function addTodo(todo) {
+export function addTodo(todo, userUID) {
   todosCollection.add({
     ...todo,
     isDeleted: false,
     isDone: false,
-    createdAt: Date.now()
+    createdAt: Date.now(),
+    userUID: userUID
   });
 }
 

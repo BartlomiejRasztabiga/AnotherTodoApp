@@ -25,10 +25,10 @@ export const login = (email, password) => {
   };
 };
 
-export const loginSuccess = user => {
+export const loginSuccess = userUID => {
   return {
     type: LOGIN_SUCCESS,
-    payload: user
+    payload: userUID
   };
 };
 
