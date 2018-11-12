@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Tooltip } from "@material-ui/core";
 
 import AttachmentIcon from "@material-ui/icons/Attachment";
 
@@ -13,15 +13,19 @@ function TodoAttachments(props) {
   return (
     <div style={{ marginRight: 50 }}>
       {props.todoData.attachments &&
-        props.todoData.attachments.map((attachment, key) => (
-          <IconButton
-            aria-label="Attachment"
-            key={key}
-            onClick={() => openLinkInNewTab(attachment)}
-          >
-            <AttachmentIcon />
-          </IconButton>
-        ))}
+        props.todoData.attachments.map((attachment, key) => {
+          let attachmentObject = Object.entries(attachment)[0];
+          return (
+            <Tooltip key={key} title={attachmentObject[0]}>
+              <IconButton
+                aria-label="Attachment"
+                onClick={() => openLinkInNewTab(attachmentObject[1])}
+              >
+                <AttachmentIcon />
+              </IconButton>
+            </Tooltip>
+          );
+        })}
     </div>
   );
 }

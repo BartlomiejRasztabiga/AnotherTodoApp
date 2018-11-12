@@ -37,7 +37,12 @@ export function uploadAttachments(files, callback) {
   Promise.all(files.map(file => uploadAttachment(file, file.name))).then(
     results => {
       Promise.all(results.map(result => result.ref.getDownloadURL())).then(
-        urls => callback(urls)
+        urls =>
+          callback(
+            files
+              .map(file => file.name)
+              .map((n, index) => ({ [n]: urls[index] }))
+          )
       );
     }
   );
